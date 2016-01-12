@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>     
+<script src="assets/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="assets/app/app.js"></script>    
+<!--script type="text/javascript">
+jQuery(function($){
+    //
+	var $box = $('#box1'), count = 1;
+	$('#addboxGraph, #addboxConfig, #addboxModel, #addboxqueryEtl, #addboxEtl').click(function(e){
+		//e.preventDefault();
+		//var idname = 'box' + (++count);
+		//$box.parent().append($box.clone().attr({id: idname, name: idname}));
+        
+	});
+	
+});
+</script-->
+<style type="text/css">
+#box{
+	display: block;
+}
+    .tab-content{padding: 20px;}
+</style>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Tool</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+<body ng-app="mainModule">
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    TOOL
+                </a>
+
+            </div>
+
+            <div class="right-div">
+                <a href="#" class="btn btn-danger pull-right">LOG ME OUT</a>
+            </div>
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+  
+    <div class="content-wrapper" ng-controller="jsonController">       
+         <div class="container">
+            <form name="form" id="form" ng-submit="createJsonFormatter();"> 
+              <div style="padding:0px;" class="col-md-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div style="padding:0px;" class="panel-body">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#etl" data-toggle="tab">ETL</a>
+                                </li>
+                                <li class=""><a href="#model" data-toggle="tab">MODEL</a>
+                                </li>
+                                <li class=""><a href="#graph" data-toggle="tab">GRAPH</a>
+                                </li>
+                                <li class=""><a href="#config" data-toggle="tab">CONFIG</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="etl">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                <div id="etlAppendHtml">
+                                                    <div id="box1" class="panel panel-primary etlUtility mainEtlentity">
+                                                        <div class="panel-heading">
+                                                            <label class="left">Name</label><input class="form-control" type="text">
+                                                            <!--button class="btn btn-danger right" type="button">Remove</button-->
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                        <div class="panel-body chat-widget-main" contenteditable="true" data-text="Enter text here"></div>
+                                                    </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="alert alert-info text-center">
+                                                <h3><a id="addboxEtl" style="margin-right:15px;" href="#" class="btn btn-default" ng-click="appendhtml('etl')">+</a>  Add New</h3> 
+                                                <hr />
+                                                <!--h3><a style="margin-right:15px;" href="#" class="btn btn-default">+</a>  Add Header</h3-->
+                                                <h3><a id="addboxqueryEtl" style="margin-right:15px;" href="#" class="btn btn-default" ng-click="appendhtml('etlQuery')">+</a>  Add Query</h3> 
+                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="model">
+                                      <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <div id="modelAppendHtml">
+                                                <div id="box1" class="panel panel-primary ">
+                                                    <div class="panel-heading">
+                                                        <label>Name</label><input class="form-control left" type="text">
+                                                    </div>
+                                                    <div class="panel-body chat-widget-main" contenteditable="true" data-text="Enter text here"></div>
+                                                </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="alert alert-info text-center">
+                                                <h3><a id="addboxModel" ng-click="appendhtml('model')" style="margin-right:15px;" href="#" class="btn btn-default">+</a>  Add New</h3> 
+                                                <hr />
+                                                <h3><a style="margin-right:15px;" href="#" class="btn btn-default">+</a>  Add Header</h3>                  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="graph">
+                                      <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <div id="graphAppendHtml">
+                                                <div id="box1" class="panel panel-primary ">
+                                                <div class="panel-heading">
+                                                    <label>Name</label><input class="form-control left" type="text">
+                                                </div>
+                                                <div class="panel-body chat-widget-main" contenteditable="true" data-text="Enter text here"></div>
+                                            </div>
+                                            </div>    
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="alert alert-info text-center">
+                                                <h3><a id="addboxGraph" style="margin-right:15px;" href="#" class="btn btn-default" ng-click="appendhtml('graph')">+</a>  Add New</h3> 
+                                                <hr />
+                                                <h3><a style="margin-right:15px;" href="#" class="btn btn-default">+</a>  Add Header</h3>                  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="config">
+                                      <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <div id="configAppendHtml">
+                                                <div id="box1" class="panel panel-primary ">
+                                                <div class="panel-heading">
+                                                    <label>Name</label><input class="form-control left" type="text">
+                                                </div>
+                                                <div class="panel-body chat-widget-main" contenteditable="true" data-text="Enter text here"></div>
+                                            </div>
+                                            </div>    
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="alert alert-info text-center">
+                                                <h3><a id="addboxConfig" style="margin-right:15px;" href="#" class="btn btn-default" ng-click="appendhtml('config')">+</a>  Add New</h3> 
+                                                <hr />
+                                                <h3><a style="margin-right:15px;" href="#" class="btn btn-default">+</a>  Add Header</h3>                  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             <button type="submit" style="float:right;" href="#" class="btn btn-primary">Submit</button>
+            </form>
+
+    </div>
+    <div class="modal fade" id="jsonPreview" tabindex="-1" role="dialog" aria-labelledby="Story Preview" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <pre>{{jsonFormat}}</pre>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Export</button> 
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
+          </div>
+    </div>
+  </div>
+</div>        
+    </div>
+     <!-- CONTENT-WRAPPER SECTION END-->
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   &copy; Copyright 
+                </div>
+
+            </div>
+        </div>
+    </section>
+      <!-- FOOTER SECTION END-->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <!-- CUSTOM STYLE  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="assets/js/bootstrap.js"></script>
+      <!-- CUSTOM SCRIPTS  -->
+    <script src="assets/js/custom.js"></script>
+  
+</body>
+</html>
